@@ -16,14 +16,10 @@ if C_COMPILE:
         from Cython.Build import cythonize
         extensions = [Extension("velocyto.speedboosted",
                                 ["velocyto/speedboosted.pyx"],
-                                extra_compile_args=['-fopenmp', "-ffast-math"],  # NOTE optional flags -O3 -ffast-math -march=native
-                                extra_link_args=['-fopenmp'])]
         extensions = cythonize(extensions, include_path=[np.get_include()])
     else:
         extensions = [Extension("velocyto.speedboosted",
-                                ["velocyto/speedboosted.c"],
-                                extra_compile_args=['-fopenmp', "-ffast-math"],
-                                extra_link_args=['-fopenmp'])]
+                                ["velocyto/speedboosted.c"]
 else:
     extensions = []
     if "darwin" in sys.platform:
